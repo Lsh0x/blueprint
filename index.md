@@ -34,6 +34,9 @@ Proven architectural patterns and design decisions.
 | [Sealed Class Modeling](architecture/sealed-class-modeling.md) | Dart sealed classes, exhaustive switch, JSON discriminator |
 | [Embedding Model Management](architecture/embedding-model-management.md) | ONNX model swap, re-generation, version bump, dimension checks |
 | [Dual Database Pattern](architecture/dual-database-pattern.md) | Separate reference DB from user DB for independent content updates |
+| [OAuth / Auth Flow](architecture/oauth-auth-flow.md) | OAuth 2.0 + PKCE, token lifecycle, social login, secure storage |
+| [State Management Decision](architecture/state-management-decision.md) | Decision framework: Riverpod vs Bloc vs Provider, state categories |
+| [Offline-First Architecture](architecture/offline-first-architecture.md) | Sync engine, conflict resolution, operation queue, CRDT |
 
 ## Workflow
 
@@ -42,6 +45,7 @@ Development processes, conventions, and knowledge management.
 | Blueprint | Summary |
 |-----------|---------|
 | [KnowLoop Integration](workflow/knowloop-integration.md) | Warm-up, plan→task→commit linking, knowledge capture rules |
+| [App Store Release Checklist](workflow/app-store-release-checklist.md) | End-to-end iOS + Android release process, review gotchas |
 
 ## Patterns
 
@@ -52,3 +56,5 @@ Reusable design and code patterns extracted from production.
 | [Data Fallback Resolution](patterns/data-fallback-resolution.md) | Multi-layer fallback when data is incomplete or missing |
 | [Flutter UI Gotchas](patterns/flutter-ui-gotchas.md) | Stack clip, gesture detection, hit-testing, positioned children |
 | [Data Pipeline i18n](patterns/data-pipeline-i18n.md) | Export→translate→seed pattern, JSON dicts, schema sync |
+| [Error Handling & Logging](patterns/error-handling-logging.md) | Result type, error classification, Sentry, structured logging |
+| [API Integration Pattern](patterns/api-integration-pattern.md) | Dio interceptors, retry, caching, pagination, request dedup |
