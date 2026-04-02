@@ -33,6 +33,7 @@ Proven architectural patterns and design decisions.
 | [Multilingual Content Resolution](architecture/multilingual-content-resolution.md) | Layered fallback, locale immutability, corpus stack pattern |
 | [Sealed Class Modeling](architecture/sealed-class-modeling.md) | Dart sealed classes, exhaustive switch, JSON discriminator |
 | [Embedding Model Management](architecture/embedding-model-management.md) | ONNX model swap, re-generation, version bump, dimension checks |
+| [Dual Database Pattern](architecture/dual-database-pattern.md) | Separate reference DB from user DB for independent content updates |
 
 ## Workflow
 
