@@ -1,69 +1,52 @@
 # Blueprint
 
-A collection of **reusable blueprints** extracted from real-world projects.
+Reusable blueprints extracted from real-world projects.
 
-Each blueprint is a standalone, human-readable markdown document capturing proven patterns, step-by-step guides, and hard-won gotchas — so you never start from zero.
+Stop starting from zero. Each blueprint is a standalone, human-readable guide capturing battle-tested patterns, step-by-step workflows, and hard-won gotchas.
+
+## What is a Blueprint?
+
+A blueprint is a **generic, actionable document** that answers: *"How do I do X properly?"*
+
+Examples:
+- Setting up CI/CD for a Flutter iOS app with TestFlight
+- Structuring a new project with proper conventions
+- Handling multilingual content with fallback resolution
+- Managing database migrations safely
+
+## How to Use
+
+1. Browse the **[Index](index.md)** to find the blueprint you need
+2. Follow the steps — each blueprint is a self-contained checklist
+3. Check the **Gotchas** section to avoid known pitfalls
 
 ## Philosophy
 
-- **Generic first** — blueprints work across projects, not tied to one codebase
+- **Generic first** — works across projects, not tied to one codebase
 - **Battle-tested** — every blueprint comes from real production experience
-- **Actionable** — checklists and steps you can follow, not abstract theory
+- **Actionable** — checklists you can follow, not abstract theory
 - **Living documents** — blueprints evolve as we learn more
-
-## Structure
-
-```
-blueprint/
-├── README.md
-├── project-setup/        # New project bootstrapping
-├── ci-cd/                # CI/CD pipelines & deployment
-├── architecture/         # Architectural patterns & decisions
-├── workflow/             # Development workflow & conventions
-└── patterns/             # Reusable code & design patterns
-```
 
 ## Blueprint Format
 
-Each blueprint follows a consistent structure:
+Every blueprint follows the **[Template](TEMPLATE.md)**:
 
-```markdown
-# Blueprint: <Title>
+| Section | Purpose |
+|---------|---------|
+| **When to Use** | Context and situations where this applies |
+| **Prerequisites** | What you need before starting |
+| **Steps** | Numbered, actionable checklist |
+| **Gotchas** | Known pitfalls and how to avoid them |
+| **Checklist** | Quick validation before calling it "done" |
 
-> One-line summary of what this blueprint covers.
+## Contributing
 
-## When to Use
-Context and situations where this blueprint applies.
+Blueprints are extracted from knowledge captured in [KnowLoop](https://github.com/Lsh0x/KnowLoop). To add a new blueprint:
 
-## Prerequisites
-What you need before starting.
-
-## Steps
-Numbered, actionable checklist.
-
-## Gotchas
-Known pitfalls and how to avoid them.
-
-## Checklist
-Quick validation checklist before considering it "done".
-
-## References
-Links to source material, KnowLoop notes, external docs.
-```
-
-## Categories
-
-| Category | Description |
-|----------|-------------|
-| **project-setup** | Bootstrapping new projects with proper conventions |
-| **ci-cd** | Continuous integration, deployment pipelines, TestFlight, GitHub Actions |
-| **architecture** | Proven architectural patterns (DB migrations, multilingual, sealed classes...) |
-| **workflow** | Git conventions, code review, knowledge capture processes |
-| **patterns** | Reusable design patterns extracted from production code |
-
-## Source
-
-Blueprints are extracted and generalized from knowledge captured in [KnowLoop](https://github.com/Lsh0x/KnowLoop) across multiple projects.
+1. Identify a reusable pattern from a real project
+2. Generalize it — remove project-specific details
+3. Follow the standard format
+4. Add it to the [Index](index.md)
 
 ## License
 
