@@ -22,6 +22,7 @@ Continuous integration, delivery pipelines, and deployment automation.
 | [iOS TestFlight Deploy](ci-cd/ios-testflight-deploy.md) | App Store Connect, certificates, GitHub Actions, automatic signing |
 | [GitHub Actions for Flutter](ci-cd/github-actions-flutter.md) | PR checks, deploy on merge/tag, caching, build numbers |
 | [Git LFS in CI](ci-cd/git-lfs-in-ci.md) | When to use LFS, `.gitattributes` setup, CI checkout config |
+| [Targeted CI Checks](ci-cd/targeted-ci-checks.md) | Run linters and tests only on changed files + their dependents |
 
 ## Architecture
 
