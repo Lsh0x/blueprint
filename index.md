@@ -38,6 +38,8 @@ Proven architectural patterns and design decisions.
 | [OAuth / Auth Flow](architecture/oauth-auth-flow.md) | OAuth 2.0 + PKCE, token lifecycle, social login, secure storage |
 | [State Management Decision](architecture/state-management-decision.md) | Decision framework: Riverpod vs Bloc vs Provider, state categories |
 | [Offline-First Architecture](architecture/offline-first-architecture.md) | Sync engine, conflict resolution, operation queue, CRDT |
+| [Navigation & Routing](architecture/navigation-routing.md) | go_router, deep links, route guards, nested navigation, tab state |
+| [Push Notifications](architecture/push-notifications.md) | FCM/APNs, permissions, local notifications, background handling |
 
 ## Workflow
 
@@ -64,3 +66,7 @@ Reusable design and code patterns extracted from production.
 | [Service Layer Pattern](patterns/service-layer-pattern.md) | Interface-based deps, cache+fallback chain, hand-written mocks, offline support |
 | [AsyncNotifier Lifecycle](patterns/async-notifier-lifecycle.md) | build→state→mutate→invalidateSelf→rebuild cycle, settings persistence example |
 | [API Integration Pattern](patterns/api-integration-pattern.md) | Dio interceptors, retry, caching, pagination, request dedup |
+| [Testing Strategy](patterns/testing-strategy.md) | Unit, widget, golden, integration tests, CI shards, coverage gates |
+| [Dependency Injection](patterns/dependency-injection.md) | Constructor injection, get_it, scoped deps, async init, test overrides |
+| [Theming & Design System](patterns/theming-design-system.md) | Material 3 tokens, dark mode, responsive layout, component library |
+| [Feature Flags & Remote Config](patterns/feature-flags-remote-config.md) | Staged rollouts, A/B testing, kill switches, flag lifecycle |
