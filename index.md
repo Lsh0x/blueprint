@@ -60,4 +60,7 @@ Reusable design and code patterns extracted from production.
 | [Flutter UI Gotchas](patterns/flutter-ui-gotchas.md) | Stack clip, gesture detection, hit-testing, async state traps, i18n-first |
 | [Data Pipeline i18n](patterns/data-pipeline-i18n.md) | Export→translate→seed pattern, JSON dicts, schema sync |
 | [Error Handling & Logging](patterns/error-handling-logging.md) | Result type, error classification, Sentry, structured logging |
+| [ViewModel Pure Functions](patterns/viewmodel-pure-functions.md) | Pure top-level functions, immutable state, IO-free, testable without Flutter |
+| [Service Layer Pattern](patterns/service-layer-pattern.md) | Interface-based deps, cache+fallback chain, hand-written mocks, offline support |
+| [AsyncNotifier Lifecycle](patterns/async-notifier-lifecycle.md) | build→state→mutate→invalidateSelf→rebuild cycle, settings persistence example |
 | [API Integration Pattern](patterns/api-integration-pattern.md) | Dio interceptors, retry, caching, pagination, request dedup |
