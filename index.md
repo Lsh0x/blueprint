@@ -47,6 +47,7 @@ Development processes, conventions, and knowledge management.
 |-----------|---------|
 | [KnowLoop Integration](workflow/knowloop-integration.md) | Warm-up, plan→task→commit linking, knowledge capture rules |
 | [App Store Release Checklist](workflow/app-store-release-checklist.md) | End-to-end iOS + Android release process, review gotchas |
+| [PR Strategy](workflow/pr-strategy.md) | Split vs merge PRs, QA-ability criterion, consolidation pattern |
 
 ## Patterns
 
@@ -55,7 +56,8 @@ Reusable design and code patterns extracted from production.
 | Blueprint | Summary |
 |-----------|---------|
 | [Data Fallback Resolution](patterns/data-fallback-resolution.md) | Multi-layer fallback when data is incomplete or missing |
-| [Flutter UI Gotchas](patterns/flutter-ui-gotchas.md) | Stack clip, gesture detection, hit-testing, positioned children |
+| [Riverpod Provider Wiring](patterns/riverpod-provider-wiring.md) | End-to-end provider wiring: bootstrap, ConsumerWidget wrapper, null-guard, tests |
+| [Flutter UI Gotchas](patterns/flutter-ui-gotchas.md) | Stack clip, gesture detection, hit-testing, async state traps, i18n-first |
 | [Data Pipeline i18n](patterns/data-pipeline-i18n.md) | Export→translate→seed pattern, JSON dicts, schema sync |
 | [Error Handling & Logging](patterns/error-handling-logging.md) | Result type, error classification, Sentry, structured logging |
 | [API Integration Pattern](patterns/api-integration-pattern.md) | Dio interceptors, retry, caching, pagination, request dedup |
