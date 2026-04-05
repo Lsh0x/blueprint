@@ -40,6 +40,12 @@ flowchart TD
     F -->|Yes| H{"Gesture conflict?"}
     H -->|Yes| I["Check gesture arena\n→ Gotcha G2"]
     H -->|No| J["Check IgnorePointer /\nAbsorbPointer\n→ Gotcha H2"]
+    A --> K{"Uses AsyncValue\n+ null guard?"}
+    K -->|Yes| L["Handle error state\n→ Gotcha S1"]
+    K -->|No| M{"Pushed with\nsnapshot state?"}
+    M -->|Yes| N["Use ConsumerWidget\nwrapper → Gotcha S2"]
+    M -->|No| O{"Hardcoded string?"}
+    O -->|Yes| P["Use l10n → Gotcha I1"]
 ```
 
 ## Gotchas by Category
@@ -309,6 +315,120 @@ Row(
 
 **Prevention rule**: Every `Text` inside a `Row` must be wrapped in `Expanded` or `Flexible` unless the text is guaranteed short (e.g. a single character label).
 
+### State & Provider
+
+#### S1 — Silent null return on async provider error
+
+**Symptom**: Tapping a button (e.g. "Settings") does absolutely nothing. No crash, no error in console, no navigation.
+
+**Root Cause**: The navigation guard checks `if (state == null) return;` on an `AsyncValue`. When the backing provider errors out (e.g. missing DB override), `valueOrNull` returns `null` and the tap is silently swallowed.
+
+**Fix**:
+
+```dart
+// BEFORE — silent swallow
+void _openSettings(BuildContext context, WidgetRef ref) {
+  final state = ref.read(settingsProvider).valueOrNull;
+  if (state == null) return; // provider errored → null → nothing happens
+
+  Navigator.of(context).push(...);
+}
+
+// AFTER — handle error explicitly
+void _openSettings(BuildContext context, WidgetRef ref) {
+  final async = ref.read(settingsProvider);
+  async.when(
+    loading: () => ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Loading...')),
+    ),
+    error: (e, _) => ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Error: $e')),
+    ),
+    data: (state) => Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const _LiveSettingsScreen()),
+    ),
+  );
+}
+```
+
+**Prevention rule**: Never use `valueOrNull` + null-guard as a navigation gate. Always handle loading and error states explicitly, even if it's just a log or snackbar. See also [Riverpod Provider Wiring](riverpod-provider-wiring.md) for the full pattern.
+
+---
+
+#### S2 — Pushed screen receives snapshot state, never updates
+
+**Symptom**: You change a setting (locale, currency), go back, re-open the screen — it shows the old value. Or worse: it looks updated but reverts on rebuild.
+
+**Root Cause**: The screen was pushed with `SettingsScreen(state: currentState)` — a frozen snapshot. The pushed route never watches the provider.
+
+**Fix**:
+
+```dart
+// BEFORE — snapshot, never updates
+Navigator.push(MaterialPageRoute(
+  builder: (_) => SettingsScreen(state: ref.read(provider).value!),
+));
+
+// AFTER — push a ConsumerWidget wrapper that watches the provider
+Navigator.push(MaterialPageRoute(
+  builder: (_) => const _LiveSettingsScreen(), // watches provider
+));
+```
+
+**Prevention rule**: Never pass async state as a constructor parameter to a pushed route. Use a `ConsumerWidget` wrapper that `ref.watch`es the provider. The original widget stays a pure `StatelessWidget` for testability. Full pattern in [Riverpod Provider Wiring](riverpod-provider-wiring.md).
+
+---
+
+#### S3 — ConsumerWidget migration breaks widget tests
+
+**Symptom**: After converting a widget from `StatelessWidget` to `ConsumerWidget`, widget tests crash with `UnimplementedError` or `ProviderScope not found`.
+
+**Root Cause**: The widget now reads a provider at build time. Tests that pump the widget (or its parent) without a `ProviderScope` with the required overrides will crash.
+
+**Fix**:
+
+```dart
+// BEFORE — works until someone adds a provider read
+await tester.pumpWidget(const MyApp());
+
+// AFTER — wrap with ProviderScope + in-memory DB
+final db = UserDatabase(NativeDatabase.memory());
+addTearDown(db.close);
+
+await tester.pumpWidget(
+  ProviderScope(
+    overrides: [userDatabaseProvider.overrideWithValue(db)],
+    child: const MyApp(),
+  ),
+);
+```
+
+**Prevention rule**: Every `ConsumerWidget` migration must include a widget test update. Grep your test files for usages of the affected widget and add `ProviderScope` overrides.
+
+---
+
+### Internationalization
+
+#### I1 — Hardcoded strings "for now" that ship to production
+
+**Symptom**: UI shows French strings to English users (or vice versa). Labels like `'Comptes'`, `'Récurrences'` hardcoded directly in the widget.
+
+**Root Cause**: Developer uses string literals intending to "add i18n later" — then forgets or it ships before the TODO is addressed.
+
+**Fix**:
+
+```dart
+// BEFORE — hardcoded
+_Tile(label: 'Comptes', icon: Icons.account_balance)
+
+// AFTER — always use l10n from the start
+_Tile(label: l10n.moreAccounts, icon: Icons.account_balance)
+```
+
+**Prevention rule**: Never write a user-visible string literal in a widget. Add the ARB key at the same time you create the widget. Run `flutter gen-l10n` immediately. If you see a string literal in a `Text()` or `label:` during code review, it's a bug.
+
+---
+
 ## Checklist
 
 Use during UI code review:
@@ -321,6 +441,10 @@ Use during UI code review:
 - [ ] Nested `GestureDetector`s explicitly set `behavior` and are tested on real devices
 - [ ] `Text` inside `Row` is wrapped in `Expanded` or `Flexible` with overflow handling
 - [ ] Popups and dropdowns use `Overlay` and are not children of clipped containers
+- [ ] No `valueOrNull` + null-guard used as navigation gate — handle error/loading explicitly
+- [ ] Pushed routes use `ConsumerWidget` wrappers, not snapshot state props
+- [ ] Widget tests include `ProviderScope` override for every `ConsumerWidget` ancestor
+- [ ] No user-visible string literals — all text uses `l10n.xxx` keys
 
 ## References
 
