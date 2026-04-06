@@ -42,6 +42,8 @@ Proven architectural patterns and design decisions.
 | [Navigation & Routing](architecture/navigation-routing.md) | go_router, deep links, route guards, nested navigation, tab state |
 | [Push Notifications](architecture/push-notifications.md) | FCM/APNs, permissions, local notifications, background handling |
 | [Local Storage Decision](architecture/local-storage-decision.md) | SharedPreferences vs Hive vs SQLite vs SecureStorage decision guide |
+| [Database Asset Versioning](architecture/database-asset-versioning.md) | PRAGMA user_version as single source of truth, bundled/downloaded/manifest comparison |
+| [Corpus Download & Hot-Swap](architecture/corpus-download-hot-swap.md) | Safe DB download, SHA-256 verify, WAL cleanup, CorpusManager lifecycle, rollback |
 
 ## Workflow
 
@@ -82,3 +84,7 @@ Reusable design and code patterns extracted from production.
 | [Pagination & Infinite Scroll](patterns/pagination-infinite-scroll.md) | Cursor/offset/keyset pagination, scroll trigger, pull-to-refresh |
 | [Form Validation](patterns/form-validation.md) | Reactive validation, field-level errors, submit gate, custom inputs |
 | [Search Implementation](patterns/search-implementation.md) | Local + remote search, debounce, FTS5, suggestions, recent searches |
+| [Spaced Repetition System](patterns/spaced-repetition-system.md) | SM-2/FSRS algorithm, card scheduling, review queue, analytics |
+| [On-Device ML Inference](patterns/on-device-ml-inference.md) | ONNX Runtime mobile, embeddings, tokenization, batched inference, memory management |
+| [Content Progress Tracking](patterns/content-progress-tracking.md) | Reading position, completion detection, streaks, session tracking, stats |
+| [Block-Based Content Modeling](patterns/block-based-content-modeling.md) | Sealed class blocks, JSON discriminator, rendering pipeline, ordering |
