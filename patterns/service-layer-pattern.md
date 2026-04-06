@@ -377,7 +377,7 @@ No interface needed — it's already testable as-is.
 
 ## References
 
-- [Service layer pattern in Budget (Tier 6)](# ) — original pattern note
+- Service layer pattern in Budget (Tier 6) — original pattern note
 - [ViewModel Pure Functions](viewmodel-pure-functions.md) — how VMs consume service data
 - [Error Handling & Logging](error-handling-logging.md) — Result types and error classification
 - [Offline-First Architecture](../architecture/offline-first-architecture.md) — full offline sync strategy

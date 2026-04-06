@@ -55,16 +55,17 @@ for dir in "${BLUEPRINT_DIRS[@]}"; do
     [ -f "$file" ] || continue
     CHECKED=$((CHECKED + 1))
     relpath="${file#$ROOT/}"
-    content="$(cat "$file")"
     file_ok=true
+    # Read first 20 lines for metadata checks (avoids SIGPIPE with large files + pipefail)
+    header="$(head -20 "$file")"
 
     # Check metadata comment
-    if ! echo "$content" | head -20 | grep -q "^<!--"; then
+    if ! echo "$header" | grep -q "^<!--"; then
       error "$relpath — missing metadata comment (<!-- tags, category, ... -->)"
       file_ok=false
     else
       for field in "tags:" "category:" "difficulty:" "time:"; do
-        if ! echo "$content" | head -20 | grep -q "$field"; then
+        if ! echo "$header" | grep -q "$field"; then
           error "$relpath — metadata missing '$field'"
           file_ok=false
         fi
@@ -73,7 +74,7 @@ for dir in "${BLUEPRINT_DIRS[@]}"; do
 
     # Check required sections
     for section in "${REQUIRED_SECTIONS[@]}"; do
-      if ! echo "$content" | grep -q "^${section}"; then
+      if ! grep -q "^${section}" "$file"; then
         error "$relpath — missing required section: $section"
         file_ok=false
       fi
@@ -82,7 +83,7 @@ for dir in "${BLUEPRINT_DIRS[@]}"; do
     # Check at least one content section exists
     has_content=false
     for section in "${CONTENT_SECTIONS[@]}"; do
-      if echo "$content" | grep -q "^${section}"; then
+      if grep -q "^${section}" "$file"; then
         has_content=true
         break
       fi
@@ -93,10 +94,10 @@ for dir in "${BLUEPRINT_DIRS[@]}"; do
     fi
 
     # Check for TL;DR content (not just the heading)
-    tldr_line=$(echo "$content" | grep -n "^## TL;DR" | head -1 | cut -d: -f1)
+    tldr_line=$(grep -n "^## TL;DR" "$file" | head -1 | cut -d: -f1)
     if [ -n "$tldr_line" ]; then
       next_line=$((tldr_line + 2))
-      tldr_content=$(echo "$content" | sed -n "${next_line}p")
+      tldr_content=$(sed -n "${next_line}p" "$file")
       if [ -z "$tldr_content" ]; then
         warn "$relpath — TL;DR section appears empty"
       fi

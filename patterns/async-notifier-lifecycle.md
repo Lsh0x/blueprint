@@ -296,7 +296,7 @@ Future<void> setLocale(Locale locale) async {
 
 ## References
 
-- [Settings persistence pattern (Budget Tier 7e)](# ) — original pattern note
+- Settings persistence pattern (Budget Tier 7e) — original pattern note
 - [Riverpod Provider Wiring](riverpod-provider-wiring.md) — bootstrap + test wiring (prerequisite)
 - [ViewModel Pure Functions](viewmodel-pure-functions.md) — when you DON'T need mutations (read-only state)
 - [Flutter UI Gotchas → S1](flutter-ui-gotchas.md) — silent null return on async error
