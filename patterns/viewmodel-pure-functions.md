@@ -305,7 +305,7 @@ This keeps the mapping close to the model and DRY across VMs.
 
 ## References
 
-- [ViewModel pattern in Budget (Tier 7)](# ) — original pattern note from Budget project
+- ViewModel pattern in Budget (Tier 7) — original pattern note from Budget project
 - [Riverpod Provider Wiring](riverpod-provider-wiring.md) — how to wire the thin provider wrapper
 - [AsyncNotifier Lifecycle](async-notifier-lifecycle.md) — when you need mutating state (settings, forms)
 - [Flutter UI Gotchas](flutter-ui-gotchas.md) — common UI traps when rendering state
