@@ -23,6 +23,7 @@ Continuous integration, delivery pipelines, and deployment automation.
 | [GitHub Actions for Flutter](ci-cd/github-actions-flutter.md) | PR checks, deploy on merge/tag, caching, build numbers |
 | [Git LFS in CI](ci-cd/git-lfs-in-ci.md) | When to use LFS, `.gitattributes` setup, CI checkout config |
 | [Targeted CI Checks](ci-cd/targeted-ci-checks.md) | Run linters and tests only on changed files + their dependents |
+| [Android Play Store Deploy](ci-cd/android-play-store-deploy.md) | GitHub Actions, Play App Signing, Fastlane supply, staged rollouts |
 
 ## Architecture
 
@@ -40,6 +41,7 @@ Proven architectural patterns and design decisions.
 | [Offline-First Architecture](architecture/offline-first-architecture.md) | Sync engine, conflict resolution, operation queue, CRDT |
 | [Navigation & Routing](architecture/navigation-routing.md) | go_router, deep links, route guards, nested navigation, tab state |
 | [Push Notifications](architecture/push-notifications.md) | FCM/APNs, permissions, local notifications, background handling |
+| [Local Storage Decision](architecture/local-storage-decision.md) | SharedPreferences vs Hive vs SQLite vs SecureStorage decision guide |
 
 ## Workflow
 
@@ -51,6 +53,7 @@ Development processes, conventions, and knowledge management.
 | [App Store Release Checklist](workflow/app-store-release-checklist.md) | End-to-end iOS + Android release process, review gotchas |
 | [PR Strategy](workflow/pr-strategy.md) | Split vs merge PRs, QA-ability criterion, consolidation pattern |
 | [Screen Interaction Graph](workflow/screen-interaction-graph.md) | Map all screens, navigations, overlays before coding — design gate |
+| [Accessibility Checklist](workflow/accessibility-checklist.md) | Semantics, contrast, Dynamic Type, screen readers, touch targets |
 
 ## Patterns
 
@@ -76,3 +79,6 @@ Reusable design and code patterns extracted from production.
 | [Data Export/Import & Backup](patterns/data-export-import.md) | CSV/JSON export, UTF-8 BOM, conflict detection, Google Drive backup |
 | [Recurring Events & Scheduling](patterns/recurring-events-scheduling.md) | Recurrence rules, next occurrence, materialization, series editing |
 | [Drift DAO Patterns](patterns/drift-dao-patterns.md) | @DriftAccessor, watch streams, aggregates, type converters (companion to Drift Migrations) |
+| [Pagination & Infinite Scroll](patterns/pagination-infinite-scroll.md) | Cursor/offset/keyset pagination, scroll trigger, pull-to-refresh |
+| [Form Validation](patterns/form-validation.md) | Reactive validation, field-level errors, submit gate, custom inputs |
+| [Search Implementation](patterns/search-implementation.md) | Local + remote search, debounce, FTS5, suggestions, recent searches |
